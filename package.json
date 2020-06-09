@@ -1,0 +1,30 @@
+{
+  "name": "ReactCalculator",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "postinstall": "make postinstall"
+  },
+  "dependencies": {
+    "react": "15.2.1",
+    "react-native": "0.31.0"
+  },
+  "detox": {
+    "configurations": {
+      "ios.sim.debug": {
+        "binaryPath": "ios/build/Build/Products/Debug-iphonesimulator/ReactCalculator.app",
+        "build": "xcodebuild -project ios/ReactCalculator.xcodeproj -scheme ReactCalculator -configuration Debug -sdk iphonesimulator -derivedDataPath ios/build",
+        "type": "ios.simulator",
+        "name": "iPhone 8, 12.1"
+      }
+    },
+    "test-runner": "mocha",
+    "runner-config": "./mocha.opts",
+    "specs": ""
+  },
+  "devDependencies": {
+    "detox": "^12.11.3",
+    "mocha": "^6.2.3"
+  }
+}
