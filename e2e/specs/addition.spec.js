@@ -1,34 +1,30 @@
 var actions = require('../utils/actions')
-const data = require('../data/dataProvider')
 
-describe('Addition Operations', function () {
-  let operandsData = data.testData.addition
+testData = {
+  "Single Digit": {
+    operandOne: 5,
+    operandTwo: 9,
+  },
+  "Multiple Digits": {
+    operandOne: 145,
+    operandTwo: 39
+  },
+  "Floating Point": {
+    operandOne: 14.5,
+    operandTwo: 3.9
+  }
+}
 
-  for (let [key, operands] of Object.entries(operandsData)) {
-    it(`Performs addition of two ${key} digit numbers:`, async () => {
-      await actions.performOperation(operands.operandOne, operands.operandTwo, actions.operations.ADDITION)
+describe('Addition Operation Tests', function () {
+
+  // Single test function that uses data driven approach to run as many times as
+  // the number of input classes.
+  for (let [key, operands] of Object.entries(testData)) {
+
+    it(`Performs addition of two ${key} numbers:`, async () => {
+      await actions.performBaseOperation(operands.operandOne, operands.operandTwo, actions.operations.ADDITION)
       await expect(await actions.getDisplayText()).toHaveText((operands.operandOne + operands.operandTwo).toString());
     });
   }
-
-
-  // it(`Performs addition of two single digit numbers:`, async () => {
-  //   operands = operandsData.singleDigit
-  //   await actions.performOperation(operands.operandOne, operands.operandTwo, actions.operations.ADDITION)
-  //   await expect(await actions.getDisplayText()).toHaveText((operands.operandOne + operands.operandTwo).toString());
-  // });
-
-  // it('Performs addition of two Multiple digit numbers', async () => {
-  //   operands = operandsData.multipleDigit
-  //   await actions.performOperation(operands.operandOne, operands.operandTwo, actions.operations.ADDITION)
-  //   await expect(await actions.getDisplayText()).toHaveText((operands.operandOne + operands.operandTwo).toString());
-  // });
-
-  // it('Performs addition involving Floating point numbers', async () => {
-  //   operands = operandsData.floatingPoint
-  //   // Failure as Calculator fails to input floating point
-  //   await actions.performOperation(operands.operandOne, operands.operandTwo, actions.operations.ADDITION)
-  //   await expect(await actions.getDisplayText()).toHaveText((operands.operandOne + operands.operandTwo).toString());
-  // });
 
 })

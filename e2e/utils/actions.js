@@ -10,11 +10,43 @@ exports.getDisplayText = async function () {
     return displayElement;
 }
 
-exports.performOperation = async function (numberOne, numberTwo, operator) {
+exports.performBaseOperation = async function (numberOne, numberTwo, operator) {
     await enterButtonSequence(numberOne);
+    // Handle negative numbers - as the calculators only allows negative number as previous result,
+    // press = before performing an operation
+    if(numberOne < 0) {await enterButtonSequence('=')};
     await enterButtonSequence(operator)
     await enterButtonSequence(numberTwo);
     await enterButtonSequence('=')
+}
+
+exports.performBaseOperationNoEquals = async function (numberOne, numberTwo, operator) {
+    await enterButtonSequence(numberOne);
+    // Handle negative numbers - as the calculators only allows negative number as previous result,
+    // press = before performing an operation
+    if(numberOne < 0) {await enterButtonSequence('=')};
+    await enterButtonSequence(operator)
+    await enterButtonSequence(numberTwo);
+}
+
+exports.performStackedOperation = async function (number, operator) {
+    await enterButtonSequence(operator);
+    await enterButtonSequence(number)
+    await enterButtonSequence('=')
+}
+
+exports.performStackedOperationNoEquals = async function (number, operator) {
+    await enterButtonSequence(operator);
+    await enterButtonSequence(number)
+}
+
+
+
+exports.resolveOperation =  {
+    "+": async function (x, y) { return await x + y },
+    "-": async function (x, y) { return await x - y },
+    "*": async function (x, y) { return await x * y },
+    "/": async function (x, y) { return await x / y }
 }
 
 exports.operations = {
