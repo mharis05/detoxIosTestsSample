@@ -20,7 +20,15 @@ testData = {
 }
 
 describe('Multiplication Operation Tests', function () {
+  // Single test function that uses data driven approach to run as many times as
+  // the number of input classes.
 
+    /*
+    Approach:
+    Using the data object 'testData' above:
+    1. Perform the operation
+    2. Calculate and validate the final expected result for each nested data object in the test data
+    */
   for (let [key, operands] of Object.entries(testData)) {
     it(`Performs multiplication of ${key} numbers`, async () => {
       await actions.performBaseOperation(operands.operandOne, operands.operandTwo, actions.operations.MULTIPLICATION)
