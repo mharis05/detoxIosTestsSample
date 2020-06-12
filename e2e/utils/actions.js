@@ -40,8 +40,6 @@ exports.performStackedOperationNoEquals = async function (number, operator) {
     await enterButtonSequence(number)
 }
 
-
-
 exports.resolveOperation =  {
     "+": async function (x, y) { return await x + y },
     "-": async function (x, y) { return await x - y },
